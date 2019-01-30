@@ -1,0 +1,5 @@
+rootProject.name = 'avro-example'
+include 'avro-producer'
+include 'avro-consumer'
+include 'schema-registry'
+

@@ -1,0 +1,19 @@
+spring:
+  application.name: avro-producer
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer.group-id: avro-producer
+  cloud:
+    stream:
+      schema-registry-client.endpoint: http://localhost:8071
+      schema.avro.dynamic-schema-generation-enabled: true
+      kafka:
+        binder:
+          brokers: ${spring.kafka.bootstrap-servers}
+      bindings:
+        test-request:
+          destination: test-request
+          contentType: application/*+avro
+logging.level:
+  com.wilkins: debug
+server.port: 8101
