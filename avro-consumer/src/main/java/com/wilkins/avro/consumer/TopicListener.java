@@ -16,14 +16,7 @@ public class TopicListener {
         consumerRecord.headers().forEach(header -> log.info("header. key: {}, value: {}", header.key(), asString(header.value())));
     }
 
-//    @KafkaListener(topics = {"test-request"})
-//    public void listenForMessage(ConsumerRecord<?, ?> consumerRecord) {
-//        log.info("listenForMessage. got a message: {}", consumerRecord);
-//        consumerRecord.headers().forEach(header -> log.info("header. key: {}, value: {}", header.key(), asString(header.value())));
-//    }
-
     private String asString(byte[] byteArray) {
         return new String(byteArray, Charset.defaultCharset());
     }
-
 }

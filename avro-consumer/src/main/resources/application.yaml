@@ -9,5 +9,8 @@ spring:
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       properties:
         schema.registry.url: http://localhost:8071
+        auto.offset.rest: earliest
+        enable.auto.commit: true
+        specific.avro.reader: true
 logging.level:
   com.wilkins: debug
