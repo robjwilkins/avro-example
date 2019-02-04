@@ -17,10 +17,8 @@ public class TopicListener {
   @KafkaListener(topics = {"test-request"})
   public void listenForMessage(ConsumerRecord<?, ?> consumerRecord) {
     log.info("listenForMessage. got a message: {}", consumerRecord);
-    Request request = (Request) messageConverter.convertFromInternal(
+    Request request = messageConverter.convertFromInternal(
         consumerRecord, Request.class, MimeType.valueOf("application/vnd.*+avr"));
     log.info("request message: {}", request.getMessage());
-//        String value = consumerRecord.value();
-//        log.info("value: {}", value);
   }
 }
