@@ -26,9 +26,9 @@ public class AvroKafkaMessageConverter extends AvroSchemaRegistryClientMessageCo
     super(schemaRegistryClient, new NoOpCacheManager());
   }
 
-  public Object convertFromInternal(ConsumerRecord<?, ?> consumerRecord, Class<?> targetClass,
+  public <T> T convertFromInternal(ConsumerRecord<?, ?> consumerRecord, Class<T> targetClass,
       Object conversionHint) {
-    Object result;
+    T result;
     try {
       byte[] payload = (byte[]) consumerRecord.value();
 
@@ -46,7 +46,7 @@ public class AvroKafkaMessageConverter extends AvroSchemaRegistryClientMessageCo
       @SuppressWarnings("unchecked")
       DatumReader<Object> reader = getDatumReader((Class<Object>) targetClass, readerSchema, writerSchema);
       Decoder decoder = DecoderFactory.get().binaryDecoder(payload, null);
-      result = reader.read(null, decoder);
+      result = (T) reader.read(null, decoder);
     }
     catch (IOException e) {
       throw new RuntimeException("Failed to read payload", e);
