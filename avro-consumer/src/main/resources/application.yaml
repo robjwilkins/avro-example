@@ -5,9 +5,9 @@ spring:
     consumer:
       group-id: avro-consumer
 #      use-native-decoding: true
-#      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
 #      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-      value-deserializer: com.wilkins.avro.consumer.MessageDeserializer
+#      value-deserializer: com.wilkins.avro.consumer.MessageDeserializer
       properties:
         schema.registry.url: http://localhost:8081
         specific.avro.reader: true

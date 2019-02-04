@@ -6,6 +6,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @EnableBinding(MessageChannels.class)
@@ -17,11 +18,11 @@ public class ProducerController {
   private final MessageChannels messageChannels;
 
   @GetMapping("/produce")
-  public void produceMessage() {
+  public void produceMessage(@RequestParam String message) {
     Request request = new Request();
-    request.setMessage("hello world");
+    request.setMessage(message);
     Message<Request> requestMessage = MessageBuilder.withPayload(request).build();
-    log.debug("sending message");
+    log.debug("sending message: {}", message);
     messageChannels.testRequest().send(requestMessage);
   }
 }
