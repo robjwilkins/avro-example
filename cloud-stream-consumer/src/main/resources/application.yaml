@@ -1,0 +1,22 @@
+spring:
+  application.name: cloud-stream-consumer
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer.group-id: ${spring.application.name}
+  cloud:
+    stream:
+      schemaRegistryClient:
+        endpoint: http://localhost:8071
+      kafka:
+        binder:
+          brokers: ${spring.kafka.bootstrap-servers}
+        bindings:
+          input-message:
+            consumer:
+              enableDlq: true
+      bindings:
+        input-message:
+          destination: test-request
+          group: ${spring.kafka.consumer.group-id}
+          consumer:
+            maxAttempts: 1

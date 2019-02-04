@@ -1,4 +1,4 @@
-package com.wilkins.avro.producer;
+package com.wilkins.avro.cloud.stream.consumer;
 
 import javax.validation.constraints.NotNull;
 import org.springframework.beans.factory.annotation.Value;

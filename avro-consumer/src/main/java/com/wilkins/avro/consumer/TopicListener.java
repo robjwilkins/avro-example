@@ -14,6 +14,10 @@ public class TopicListener {
     public void listenForMessage(ConsumerRecord<String, Request> consumerRecord) {
         log.info("listenForMessage. got a message: {}", consumerRecord);
         consumerRecord.headers().forEach(header -> log.info("header. key: {}, value: {}", header.key(), asString(header.value())));
+        Request request = consumerRecord.value();
+        log.info("request message: {}", request.getMessage());
+//        String value = consumerRecord.value();
+//        log.info("value: {}", value);
     }
 
     private String asString(byte[] byteArray) {

@@ -4,13 +4,19 @@ spring:
     bootstrap-servers: localhost:9092
     consumer:
       group-id: avro-consumer
-      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
-#      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
-      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      use-native-decoding: true
+#      value-deserializer: org.apache.kafka.common.serialization.ByteArrayDeserializer
+#      value-deserializer: io.confluent.kafka.serializers.KafkaAvroDeserializer
+      value-deserializer: com.wilkins.avro.consumer.MessageDeserializer
       properties:
-        schema.registry.url: http://localhost:8071
-        auto.offset.rest: earliest
-        enable.auto.commit: true
+        schema.registry.url: http://localhost:8081
         specific.avro.reader: true
+        auto.offset.reset: latest
+        enable.auto.commit: true
+  cloud:
+    stream:
+      schema-registry-client.endpoint: http://localhost:8071
 logging.level:
   com.wilkins: debug
+server:
+  port: 8082

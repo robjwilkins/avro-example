@@ -2,7 +2,9 @@ spring:
   application.name: avro-producer
   kafka:
     bootstrap-servers: localhost:9092
-    consumer.group-id: avro-producer
+#    producer:
+#      properties:
+#        value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
   cloud:
     stream:
       schema-registry-client.endpoint: http://localhost:8071
@@ -10,10 +12,19 @@ spring:
       kafka:
         binder:
           brokers: ${spring.kafka.bootstrap-servers}
+#        bindings:
+#          test-request:
+#            producer:
+#              configuration:
+#                value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
       bindings:
         test-request:
           destination: test-request
           contentType: application/*+avro
+#          producer:
+#            configuration:
+#              value.serializer: io.confluent.kafka.serializers.KafkaAvroSerializer
+#            use-native-encoding: true
 logging.level:
   com.wilkins: debug
 server.port: 8101

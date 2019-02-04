@@ -22,27 +22,28 @@ repositories {
     mavenCentral()
     mavenLocal()
     maven { url "http://packages.confluent.io/maven/" }
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
 ext {
-    avroVersion = '1.8.2'
     springCloudVersion = 'Greenwich.RELEASE'
+    avroVersion = '1.8.2'
 }
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-data-couchbase'
-    implementation 'org.springframework.kafka:spring-kafka'
+    compile('org.springframework.cloud:spring-cloud-stream')
+    compile('org.springframework.cloud:spring-cloud-stream-binder-kafka')
+    implementation('org.springframework.cloud:spring-cloud-stream-schema')
 //    compile("org.apache.avro:avro:${avroVersion}")
     implementation('io.confluent:kafka-avro-serializer:4.0.0')
 
-    implementation('org.springframework.cloud:spring-cloud-stream-schema')
-
     compileOnly 'org.projectlombok:lombok'
-
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.kafka:spring-kafka-test'
 }
+
 
 dependencyManagement {
     imports {

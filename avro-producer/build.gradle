@@ -19,10 +19,10 @@ version = '0.0.1-SNAPSHOT'
 sourceCompatibility = '1.8'
 
 repositories {
-    jcenter()
-    maven { url 'https://repo.spring.io/milestone' }
-    mavenLocal()
     mavenCentral()
+    mavenLocal()
+    maven { url "http://packages.confluent.io/maven/" }
+    maven { url 'https://repo.spring.io/milestone' }
 }
 
 ext {
@@ -32,11 +32,11 @@ ext {
 
 dependencies {
     compile('org.springframework.boot:spring-boot-starter-web')
-    
     compile('org.springframework.cloud:spring-cloud-stream')
     compile('org.springframework.cloud:spring-cloud-stream-binder-kafka')
     implementation('org.springframework.cloud:spring-cloud-stream-schema')
-    compile("org.apache.avro:avro:${avroVersion}")
+//    compile("org.apache.avro:avro:${avroVersion}")
+    implementation('io.confluent:kafka-avro-serializer:4.0.0')
 
     compileOnly 'org.projectlombok:lombok'
 
